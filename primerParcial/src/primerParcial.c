@@ -245,7 +245,6 @@ int main(void)
 		}
 	}while(respuestaMenu != 6);
 
-
 	/*A. ALTA VIVENDA
 	B. MODIFICAR VIVIENDA: Se ingresará el idVivienda, permitiendo en un submenú modificar:
 	● la calle

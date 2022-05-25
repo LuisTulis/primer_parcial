@@ -6,8 +6,8 @@
  */
 
 #include "vivienda.h"
-#include "stdio.h"
-#include "string.h"
+#include <stdio.h>
+#include <string.h>
 
 int initVivienda(vivienda *list, int len)
 {
