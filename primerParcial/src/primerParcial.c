@@ -45,6 +45,8 @@ int main(void)
 
 	int opcionBuscar;
 
+	int flagOpciones = 1;
+
 
 	do
 	{
@@ -108,124 +110,146 @@ int main(void)
 				}
 
 				altaVivienda(listaViviendas, largoVivienda, idVivienda, calleAux, cantidadPersonasAux, cantidadHabitacionesAux, tipoViviendaAux, legajoCensista);
+				flagOpciones = 0;
 				break;
 			}
 			case 2:
 			{
-				utn_getNumeroEntero(&idIngresado, "Ingrese la vivienda a modificar", "\nIngrese un numero.\n", 1, 50000 , 1);
-				validacionBuscar = buscarViviendaPorID(listaViviendas, largoVivienda, idIngresado);
-
-				if(validacionBuscar != -1)
+				if(flagOpciones == 0)
 				{
-					utn_getNumeroEntero(&opcionBuscar, "\nEs esa la vivienda a modificar? \n1- Si \n2- No", "\nIngrese un numero.\n", 1, 2, 1);
-					if(opcionBuscar == 1)
+					utn_getNumeroEntero(&idIngresado, "Ingrese la vivienda a modificar", "\nIngrese un numero.\n", 1, 50000 , 1);
+					validacionBuscar = buscarViviendaPorID(listaViviendas, largoVivienda, idIngresado);
+
+					if(validacionBuscar != -1)
 					{
-						utn_getNumeroEntero(&respuestaSubMenu, "Que campo desea modificar?\n"
-												   "\n1- Calle"
-												   "\n2- Cantidad de personas"
-												   "\n3- Cantidad de habitantes"
-												   "\n4- Tipo de vivienda"
-												   "\n5- Salir", "\nError, ingrese un numero.\n", 1, 5, 3);
-						switch(respuestaSubMenu)
+						utn_getNumeroEntero(&opcionBuscar, "\nEs esa la vivienda a modificar? \n1- Si \n2- No", "\nIngrese un numero.\n", 1, 2, 1);
+						if(opcionBuscar == 1)
 						{
-							case 1:
+							utn_getNumeroEntero(&respuestaSubMenu, "Que campo desea modificar?\n"
+													   "\n1- Calle"
+													   "\n2- Cantidad de personas"
+													   "\n3- Cantidad de habitantes"
+													   "\n4- Tipo de vivienda"
+													   "\n5- Salir", "\nError, ingrese un numero.\n", 1, 5, 3);
+							switch(respuestaSubMenu)
 							{
-								fflush(stdin);
-								validacionOpcion1 = cadenaValidada(calleAux, "\nIngrese la calle de la vivienda.");
-								if(validacionOpcion1 == -1)
+								case 1:
 								{
+									fflush(stdin);
+									validacionOpcion1 = cadenaValidada(calleAux, "\nIngrese la calle de la vivienda.");
+									if(validacionOpcion1 == -1)
+									{
+										break;
+									}
+									else
+									{
+										strcpy((*(listaViviendas+validacionBuscar)).calle, calleAux);
+									}
 									break;
 								}
-								else
+								case 2:
 								{
-									strcpy((*(listaViviendas+validacionBuscar)).calle, calleAux);
-								}
-								break;
-							}
-							case 2:
-							{
-								validacionOpcion1 = utn_getNumeroEntero(&cantidadPersonasAux, "\nIngrese la cantidad de personas de la vivienda.", "\nError, ingrese un numero.\n", 1, 10, 3);
-								if(validacionOpcion1 == -1)
-								{
+									validacionOpcion1 = utn_getNumeroEntero(&cantidadPersonasAux, "\nIngrese la cantidad de personas de la vivienda.", "\nError, ingrese un numero.\n", 1, 10, 3);
+									if(validacionOpcion1 == -1)
+									{
+										break;
+									}
+									else
+									{
+										(*(listaViviendas+validacionBuscar)).cantidadPersonas = cantidadPersonasAux;
+									}
 									break;
 								}
-								else
+								case 3:
 								{
-									(*(listaViviendas+validacionBuscar)).cantidadPersonas = cantidadPersonasAux;
-								}
-								break;
-							}
-							case 3:
-							{
-								validacionOpcion1 = utn_getNumeroEntero(&cantidadHabitacionesAux, "\nIngrese la cantidad de habitaciones de la vivienda.", "\nError, ingrese un numero.\n", 1, 10, 3);
-								if(validacionOpcion1 == -1)
-								{
+									validacionOpcion1 = utn_getNumeroEntero(&cantidadHabitacionesAux, "\nIngrese la cantidad de habitaciones de la vivienda.", "\nError, ingrese un numero.\n", 1, 10, 3);
+									if(validacionOpcion1 == -1)
+									{
+										break;
+									}
+									else
+									{
+										(*(listaViviendas+validacionBuscar)).cantidadHabitaciones = cantidadHabitacionesAux;
+									}
 									break;
 								}
-								else
+								case 4:
 								{
-									(*(listaViviendas+validacionBuscar)).cantidadHabitaciones = cantidadHabitacionesAux;
-								}
-								break;
-							}
-							case 4:
-							{
-								validacionOpcion1 = utn_getNumeroEntero(&tipoViviendaAux, "\nIngrese el tipo de vivienda. \n 1-Casa \n 2- Departamento \n 3- Casilla \n 4- Rancho", "\nError, ingrese un numero valido (1-4).\n", 1, 4, 3 );
-								if(validacionOpcion1 == -1)
-								{
-									break;
-								}
-								else
-								{
-									(*(listaViviendas+validacionBuscar)).tipoVivienda = tipoViviendaAux;
-								}
+									validacionOpcion1 = utn_getNumeroEntero(&tipoViviendaAux, "\nIngrese el tipo de vivienda. \n 1-Casa \n 2- Departamento \n 3- Casilla \n 4- Rancho", "\nError, ingrese un numero valido (1-4).\n", 1, 4, 3 );
+									if(validacionOpcion1 == -1)
+									{
+										break;
+									}
+									else
+									{
+										(*(listaViviendas+validacionBuscar)).tipoVivienda = tipoViviendaAux;
+									}
 
-								break;
+									break;
+								}
+								case 5:
+								{
+									printf("\nSaliendo del menu. . . \n");
+									break;
+								}
+								default:
+								{
+									printf("Opcion incorrecta.");
+								}
 							}
-							case 5:
-							{
-								printf("\nSaliendo del menu. . . \n");
-								break;
-							}
-							default:
-							{
-								printf("Opcion incorrecta.");
-							}
+
 						}
-
+					}
+					else
+					{
+						printf("\nVivienda no encontrada..\n");
 					}
 				}
 				else
 				{
-					printf("\nVivienda no encontrada..\n");
+					printf("No hay viviendas ingresadas");
 				}
-				break;
+					break;
+
 			}
 			case 3:
 			{
-				utn_getNumeroEntero(&idIngresado, "Ingrese la vivienda a borrar", "\nIngrese un numero.\n", 1, 50000 , 1);
-				validacionBuscar = buscarViviendaPorID(listaViviendas, largoVivienda, idIngresado);
-
-				if(validacionBuscar != -1)
+				if(flagOpciones == 0)
 				{
-					utn_getNumeroEntero(&opcionBuscar, "\nEs esa la vivienda a borrar? \n1- Si \n2- No", "\nIngrese un numero.\n", 1, 2, 1);
-					if(opcionBuscar == 1)
+					utn_getNumeroEntero(&idIngresado, "Ingrese la vivienda a borrar", "\nIngrese un numero.\n", 1, 50000 , 1);
+					validacionBuscar = buscarViviendaPorID(listaViviendas, largoVivienda, idIngresado);
+
+					if(validacionBuscar != -1)
 					{
-						eliminarVivienda(listaViviendas, largoVivienda, validacionBuscar);
-						printf("\nVivienda eliminada.\n");
+						utn_getNumeroEntero(&opcionBuscar, "\nEs esa la vivienda a borrar? \n1- Si \n2- No", "\nIngrese un numero.\n", 1, 2, 1);
+						if(opcionBuscar == 1)
+						{
+							eliminarVivienda(listaViviendas, largoVivienda, validacionBuscar);
+							printf("\nVivienda eliminada.\n");
+						}
+					}
+					else
+					{
+						printf("\nVivienda no encontrada..\n");
 					}
 				}
 				else
 				{
-					printf("\nVivienda no encontrada..\n");
+					printf("No hay viviendas ingresadas");
 				}
-
 				break;
 			}
 			case 4:
 			{
-				ordenarViviendas(listaViviendas, largoVivienda);
-				listadoViviendas(listaViviendas, largoVivienda);
+				if(flagOpciones == 0)
+				{
+					ordenarViviendas(listaViviendas, largoVivienda);
+					listadoViviendas(listaViviendas, largoVivienda);
+				}
+				else
+				{
+					printf("No hay viviendas ingresadas");
+				}
 				break;
 			}
 			case 5:
