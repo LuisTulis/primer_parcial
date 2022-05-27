@@ -92,7 +92,7 @@ int main(void)
 				utn_getNumeroEntero(&mostrarCensista, "\n1- Si \n 2- No ", "\nError, ingrese un numero valido.\n", 1, 2, 3);
 				if(mostrarCensista == 1)
 				{
-					listadoCensistas(listaCensistas, LARGOCENSISTA);
+					listadoCensistas(listaCensistas, LARGOCENSISTA, listaViviendas, largoVivienda);
 				}
 
 				validacionOpcion1 = utn_getNumeroEntero(&legajoCensista, "\nIngrese el legajo del censista.", "\nError, ingrese un legajo valido.\n", 1, 1000, 3 );
@@ -254,7 +254,9 @@ int main(void)
 			}
 			case 5:
 			{
-				listadoCensistas(listaCensistas, LARGOCENSISTA);
+				ordenarViviendas(listaViviendas, largoVivienda);
+				listadoCensistas(listaCensistas, LARGOCENSISTA, listaViviendas, largoVivienda);
+
 				break;
 			}
 			case 6:

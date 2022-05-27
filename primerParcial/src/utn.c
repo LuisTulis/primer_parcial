@@ -19,17 +19,23 @@ int utn_getNumeroEntero(int *pResultado, char *mensaje, char *mensajeError, int 
 		fflush(stdin);
 		scanf("%d", &num);
 
-		if (num <= maximo && num >= minimo)
+		if(num <= maximo && num >= minimo)
+		{
 			break;
+		}
+
 		reintentos--;
 		printf(mensajeError);
 	}
+
+
 	if (reintentos == 0)
 	{
 		printf("\nusted gastó todos los intentos\n"
 				"\nvolviendo al menu.\n");
 		ret = -1;
-	} else {
+	} else
+	{
 		*pResultado = num;
 		ret = 0;
 	}

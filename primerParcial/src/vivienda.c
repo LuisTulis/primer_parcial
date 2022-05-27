@@ -72,7 +72,7 @@ void ordenarViviendas(vivienda *lista, int largo)
 
 			if ((*(lista+j)).idVivienda != -1)
 			{
-				value = strcmp( (*(lista+i)).calle, (*(lista+j)).calle );
+				value = strcmp((*(lista+i)).calle, (*(lista+j)).calle);
 
 					if(value != 1)
 					{
